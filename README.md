@@ -1,5 +1,7 @@
 # Export Dialogflow conversations to BigQuery
 
+[![Build Status](https://travis-ci.org/crosslibs/export-dialogflow-logs-to-bigquery.svg?branch=master)](https://travis-ci.org/crosslibs/export-dialogflow-logs-to-bigquery)
+
 Export Dialogflow conversations to BigQuery after masking SPII data using DLP API
 
 ## Solution Approach
