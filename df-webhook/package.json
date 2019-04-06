@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint '**/*.js'",
     "lint-fix": "eslint --fix '**/*.js'",
-    "test": "cross-env NODE_ENV=test nyc mocha"
+    "test": "cross-env NODE_ENV=test nyc mocha",
+    "coverage": "cross-env NODE_ENV=test nyc report mocha --reporter=text-lcov --reporter=html | coveralls"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "coveralls": "^3.0.3",
     "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-google": "^0.12.0",

@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 'use strict';
-// const dialogflow = require('dialogflow-fulfillment');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -66,13 +65,13 @@ function log(conv) {
  */
 function intercept(req, res) {
   validate(req)
-    .then(() => {
-      log(req.body);
-      fulfill(req, res);
-    })
-    .catch((err) => {
-      res.status(err.statusCode).json(err);
-    });
+      .then(() => {
+        log(req.body);
+        fulfill(req, res);
+      })
+      .catch((err) => {
+        res.status(err.statusCode).json(err);
+      });
 }
 
 /**
