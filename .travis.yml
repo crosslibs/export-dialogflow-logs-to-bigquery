@@ -11,5 +11,4 @@ before_install:
 install:
   - npm install
 script:
-  - cd df-webhook
   - npm test
