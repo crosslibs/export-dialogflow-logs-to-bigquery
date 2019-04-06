@@ -1,0 +1,21 @@
+{
+  "description": "nyc configuration",
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 99,
+    "statements": 99,
+    "functions": 100,
+    "branches": 99,
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [],
+    "ignore-class-method": "methodToIgnore",
+    "reporter": [
+      "lcov",
+      "text-summary",
+      "html"
+    ]
+  }
+}

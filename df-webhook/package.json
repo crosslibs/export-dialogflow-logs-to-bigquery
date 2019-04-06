@@ -1,0 +1,58 @@
+{
+  "name": "df-webhook",
+  "version": "1.0.0",
+  "description": "Dialogflow Fulfillment webhook deployed on Google App Engine",
+  "main": "src/app.js",
+  "scripts": {
+    "lint": "eslint '**/*.js'",
+    "lint-fix": "eslint --fix '**/*.js'",
+    "test": "cross-env NODE_ENV=test nyc mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crosslibs/export-dialogflow-logs-to-bigquery.git"
+  },
+  "keywords": [
+    "Dialogflow",
+    "dialogflow-v2",
+    "fulfillment",
+    "webhook",
+    "interceptor",
+    "async",
+    "logging",
+    "task",
+    "queues",
+    "DLP",
+    "API",
+    "masking",
+    "SPII",
+    "data",
+    "PII",
+    "redaction",
+    "pubsub"
+  ],
+  "author": "Chaitanya Prakash N <chaitanyaprakash.n@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/crosslibs/export-dialogflow-logs-to-bigquery/issues"
+  },
+  "homepage": "https://github.com/crosslibs/export-dialogflow-logs-to-bigquery#readme",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "dependencies": {
+    "@google-cloud/dlp": "^0.11.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-google": "^0.12.0",
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
+    "sinon": "^7.3.1"
+  }
+}
