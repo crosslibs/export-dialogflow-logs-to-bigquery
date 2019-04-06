@@ -7,7 +7,9 @@ notifications:
 cache: npm
 before_install:
   - bash ./ci-check.sh
+  - cd df-webhook
 install:
   - npm install
 script:
+  - cd df-webhook
   - npm test

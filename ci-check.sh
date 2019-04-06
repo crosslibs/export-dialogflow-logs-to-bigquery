@@ -21,6 +21,7 @@ then
   echo "$DIR_TO_MONITOR changed. Continuing with the CI process."
 else
   echo "No changes detected in $DIR_TO_MONITOR. Aborting CI."
-  travis_terminate 0
-  exit 1
+  set +e
+  pkill -9 -P $$ &> /dev/null || true
+  exit 0
 fi
