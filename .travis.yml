@@ -6,7 +6,6 @@ notifications:
   email: false
 cache: npm
 before_install:
-  - bash ./ci-check.sh
   - cd df-webhook
 install:
   - npm install
