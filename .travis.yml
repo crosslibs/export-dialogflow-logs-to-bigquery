@@ -6,7 +6,7 @@ notifications:
   email: false
 cache: npm
 before_install:
-  - sh ./ci-check.sh
+  - bash ./ci-check.sh
 install:
   - npm install
 script:

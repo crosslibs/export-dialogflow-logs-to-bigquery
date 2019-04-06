@@ -1,5 +1,4 @@
-#!/bin/sh
-
+#!/bin/bash
 # Copyright 2019, Chaitanya Prakash N <chaitanyaprakash.n@gmail.com>
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,4 +22,5 @@ then
 else
   echo "No changes detected in $DIR_TO_MONITOR. Aborting CI."
   travis_terminate 0
+  exit 1
 fi
