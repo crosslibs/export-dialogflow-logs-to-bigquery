@@ -15,4 +15,3 @@ automatic_scaling:
   max_instances: 10
   max_concurrent_requests: 25
   target_cpu_utilization: 0.7
-  max_pending_latency: 1000
