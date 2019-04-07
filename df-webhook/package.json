@@ -4,6 +4,7 @@
   "description": "Dialogflow Fulfillment webhook deployed on Google App Engine",
   "main": "src/app.js",
   "scripts": {
+    "start": "node src/app.js",
     "lint": "eslint '**/*.js'",
     "lint-fix": "eslint --fix '**/*.js'",
     "test": "cross-env NODE_ENV=test nyc mocha",
@@ -39,7 +40,7 @@
   },
   "homepage": "https://github.com/crosslibs/export-dialogflow-logs-to-bigquery#readme",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "dependencies": {
     "@google-cloud/dlp": "^0.11.0",

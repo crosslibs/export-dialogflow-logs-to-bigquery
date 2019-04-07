@@ -1,0 +1,18 @@
+runtime: nodejs10
+
+service: df-webhook
+
+# Ensure that app is always served on https
+# i.e redirect all http requests to https
+handlers:
+- url: /.*
+  script: auto
+  secure: always
+  redirect_http_response_code: 301
+
+instance_class: F1
+automatic_scaling:
+  max_instances: 10
+  max_concurrent_requests: 25
+  target_cpu_utilization: 0.7
+  max_pending_latency: 1000

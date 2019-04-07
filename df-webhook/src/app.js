@@ -18,7 +18,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const FulfillmentError = require('./error');
 const Utils = require('./utils');
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 /**
  * Validates whether the request payload
