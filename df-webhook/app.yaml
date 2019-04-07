@@ -1,6 +1,7 @@
 runtime: nodejs10
 
-service: df-webhook
+# Provide a service name if this is not your first GAE service
+# service: df-webhook
 
 # Ensure that app is always served on https
 # i.e redirect all http requests to https
