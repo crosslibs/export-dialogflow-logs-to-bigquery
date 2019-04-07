@@ -20,6 +20,6 @@ script:
 - COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN npm run coverage
 deploy:
   provider: gae
-  keyfile: df-webhook/gcp-sa-creds.json
+  keyfile: gcp-sa-creds.json
   project: export-df-logs-to-bq
   default: true
