@@ -60,6 +60,13 @@ const minLikelihood = 'LIKELIHOOD_UNSPECIFIED';
 const includeQuote = true;
 
 /**
+ * Cloud PubSub Configuration
+ */
+const {PubSub} = require('@google-cloud/pubsub');
+const pubsub = new PubSub();
+const topicName = process.env.TOPIC_NAME;
+
+/**
  * Validates whether the request payload
  * @param {object} req webhook express request
  * @throws FulfillmentError if validation fails
@@ -93,6 +100,30 @@ function fulfill(req, res) {
  */
 function pushToPubSubTopic(conv) {
   console.log(`Pushing message [${conv.responseId}, ${conv.session}]`);
+  const message = {
+    responseId: conv.responseId,
+    session: conv.session,
+    query: conv.queryResult.queryText,
+    intent: {
+      name: (conv.intent ? conv.intent.name : null),
+      displayName: (conv.intent ? conv.intent.displayName : null),
+    },
+    intentDetectionConfidence: conv.intentDetectionConfidence,
+    userId: (conv.user ? conv.user.userId : null),
+  };
+  pubsub.topic(topicName)
+      .publish(Buffer.from(JSON.stringify(message)))
+      .then((responses) => {
+        console.log('Successfully published message ' +
+                        `[${conv.responseId}, ${conv.session}] to ` +
+                        `topic ${topicName}`);
+      })
+      .catch((err) => {
+        console.error('Error while publishing message ' +
+                          `[${conv.responseId}, ${conv.session}] to ` +
+                          `topic ${topicName}`);
+        console.error(err);
+      });
 }
 
 /**
@@ -113,15 +144,15 @@ function log(conv) {
     item: {value: conv.queryResult.queryText},
   };
   dlp.deidentifyContent(request)
-     .then(responses => {
-       console.log('Deidentifying successful: ' +
+      .then((responses) => {
+        console.log('Deidentifying successful: ' +
                       `[${conv.responseId}, ${conv.session}]`);
-       conv.queryResult.queryText = responses[0].item.value;
-       pushToPubSubTopic(conv);
-     })
-     .catch(err => {
-       console.error(err);
-     });
+        conv.queryResult.queryText = responses[0].item.value;
+        pushToPubSubTopic(conv);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 }
 
 /**

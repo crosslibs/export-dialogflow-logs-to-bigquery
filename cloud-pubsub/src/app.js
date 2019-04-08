@@ -16,6 +16,7 @@
 const keyfile = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 const projectId = process.env.GOOGLE_CLOUD_PROJECT;
 const topicName = process.env.TOPIC_NAME;
+const subscriptionName = process.env.SUBSCRIPTION_NAME;
 
 /**
  * Checks whether the string is empty or not
@@ -33,16 +34,20 @@ function isEmpty(str) {
  */
 if (isEmpty(keyfile)
      || isEmpty(projectId)
-     || isEmpty(topicName)) {
+     || isEmpty(topicName)
+     || isEmpty(subscriptionName)) {
   console.error('Missing one or more of required environment variables: ' +
                   'GOOGLE_APPLICATION_CREDENTIALS, GOOGLE_CLOUD_PROJECT, ' +
-                  'TOPIC_NAME');
+                  'TOPIC_NAME, SUBSCRIPTION_NAME');
   process.exit(1);
 }
 
 const {PubSub} = require('@google-cloud/pubsub');
 const pubsub = new PubSub({projectId});
 
+/**
+ * Create Topic
+ */
 pubsub.createTopic(topicName)
     .then((responses) => {
       console.log(`Successfully created topic: ${topicName}`);
@@ -58,3 +63,24 @@ pubsub.createTopic(topicName)
         process.exit(2);
       }
     });
+
+/**
+ * Create Subscription
+ */
+pubsub.topic(topicName)
+      .createSubscription(subscriptionName)
+      .then((responses) => {
+        console.log(`Successfully created subscription: ${subscriptionName}`);
+        console.log(responses[0]);
+      })
+      .catch((err) => {
+        if (err.code == 6) {
+          // ALREADY_EXISTS
+          console.log(`Subscription ${subscriptionName} already exists!`);
+        } else {
+          console.error(`Error while creating subscription: ` +
+                          `${subscriptionName}`);
+          console.error(err);
+          process.exit(2);
+        }
+      });

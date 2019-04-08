@@ -16,4 +16,4 @@ The script uses `@google-cloud/pubsub` Node.js client libraries to setup a PubSu
 * Please ensure that the service account has necessary permissions (at least `Pub/Sub Editor` role is needed) before running the command.
 * Please ensure `Cloud PubSub API` is enabled in the GCP project
 
-`> GOOGLE_APPLICATION_CREDENTIALS=<creds> GOOGLE_CLOUD_PROJECT=<project-id> TOPIC_NAME=<topic-name> npm start`
+`> GOOGLE_APPLICATION_CREDENTIALS=<creds> GOOGLE_CLOUD_PROJECT=<project-id> TOPIC_NAME=<topic-name> SUBSCRIPTION_NAME=<subscription-name> npm start`

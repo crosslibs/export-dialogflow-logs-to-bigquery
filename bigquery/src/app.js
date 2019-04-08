@@ -70,19 +70,31 @@ const schema = [
     description: 'response id',
     mode: 'REQUIRED',
     name: 'responseId',
-    type: 'STRING',
+    type: 'STRING'
   },
   {
     description: 'session path',
     mode: 'REQUIRED',
     name: 'session',
-    type: 'STRING',
+    type: 'STRING'
+  },
+  {
+    description: 'query text',
+    mode: 'REQUIRED',
+    name: 'query',
+    type: 'STRING'
   },
   {
     description: 'user id',
     mode: 'NULLABLE',
     name: 'userId',
-    type: 'string',
+    type: 'STRING'
+  },
+  {
+    description: 'intent detection confidence score',
+    mode: 'REQUIRED',
+    name: 'intentDetectionConfidence',
+    type: 'FLOAT'
   },
   {
     description: 'intent',
@@ -94,13 +106,13 @@ const schema = [
         'description': 'intent name',
         'name': 'name',
         'type': 'STRING',
-        'mode': 'NULLABLE',
+        'mode': 'NULLABLE'
       },
       {
         'description': 'intent display name',
         'name': 'displayName',
         'type': 'STRING',
-        'mode': 'NULLABLE',
+        'mode': 'NULLABLE'
       },
     ],
   },
