@@ -7,9 +7,9 @@ cache: npm
 env:
   global:
   - CLOUDSDK_CORE_DISABLE_PROMPTS=1
-  - GCP_PROJECT_ID=export-df-logs-to-bq
+  - PROJECT_ID=export-df-logs-to-bq
   - LOCATION_ID=asia-south1
-  - QUEUE_ID=conversations
+  - QUEUE_ID=conversation-messages
   - secure: P9sIddtEctPfGm5JUDhgoHKUIqyfemP71DUJ/CTXZCLR4rV3c9mfjOqwdBDNL6K+ZE1a1SzEZ03uonLPR6FMAqshBpo/TI5De315vIhTKSy+zXo/yq+NAEf9Jukg5YvmjBey6VNY0PX3yJbE+mT8S1zy51KaFka7miSAdAQ4dYn9bg+67jXFZx3AV0YMvtAcBtzhFWRQ4mxbK0YN0l4fTbyyAr//3z1+Tqejii3OHPIfXsoUuXY8dlGIRL/SWWaGRQNYDMNL22vAdtKLb4tmvC2/Db9y7Rc6ec7GsB75cVcc2j1nlhV1YAl8gAU0DIJI5lJsVQoFcGvehqJPY4ia2woEUzBlIUMtVl72VzbVgqW733KaRu08SoaNX7slCtfdxSfJnQo1bH7JWYbmb1d4aemSeeep9y1PSpi4KEWSjZ4E33PnsXR5E41uLrQARwDTlPj69H3pWp3roTCY7G0F98uLzgXzIVeYcmWWiFUDYBGXQw1dGjjZa0wSHeIgo2z4lVQrlB1iDffjTk1NSd9l/rDpTHHNv9k+nW7xbBNVlcIifvHDfT2REce4/ec6t4TeudzzkstizliGN6Wknklot50hXq5Na5c+iyYAM/rAqsydVz9O/8484Mo0Dgq80Aid4o0GBoTjIrZQZMNTbxtaCv9I6ZEqwyBgL9TbmAsx5ZM=
 before_install:
 # Create App Engine Queue

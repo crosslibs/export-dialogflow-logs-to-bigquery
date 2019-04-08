@@ -20,6 +20,11 @@ const projectId = process.env.GCLOUD_PROJECT;
 const locationId = process.env.LOCATION_ID;
 const queueId = process.env.QUEUE_ID;
 
+/**
+ * Checks whether the string is empty or not
+ * @param {string} str String to be validated against
+ * @return {boolean} true if str is not undefined or null or empty
+ */
 function isEmpty(str) {
   return str === undefined
          || str === null
@@ -40,19 +45,35 @@ if (isEmpty(keyfile)
 }
 
 /**
- * Create a queue basis the command-line-parameter
+ * Create a queue, if none exists with the same name.
  */
 const client = new tasks.v2beta3.CloudTasksClient({keyfileName: keyfile,
-                                      projectId: projectId});
-var parent = client.locationPath(projectId, locationId);
-var queueName = client.queuePath(projectId, locationId, queueId);
-var queue = {name: queueName, appEngineHttpQueue:{}};
-var request = {parent: parent, queue: queue};
+  projectId: projectId});
+const parent = client.locationPath(projectId, locationId);
+const queueName = client.queuePath(projectId, locationId, queueId);
+const queue = {name: queueName, appEngineHttpQueue: {}};
+const request = {parent: parent, queue: queue};
 
-client.createQueue(request)
+client.getQueue({name: queueName})
     .then((responses) => {
-      console.log(responses[0]);
+      console.log(`Queue [${queueName}] exists!`);
     })
     .catch((err) => {
-      console.log(err);
+      if (err.code == 5) {
+        // NOT_FOUND
+        console.log(`Creating queue ${queue.name}`);
+        client.createQueue(request)
+            .then((responses) => {
+              console.log(responses[0]);
+            })
+            .catch((err) => {
+              console.error(`Error while creating queue ${queue}`);
+              console.error(err);
+              process.exit(2);
+            });
+      } else {
+        console.error(`Couldn't fetch queue [${queueName}] details`);
+        console.error(err);
+        process.exit(2);
+      }
     });
