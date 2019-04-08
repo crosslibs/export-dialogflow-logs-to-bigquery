@@ -92,7 +92,7 @@ function fulfill(req, res) {
  * @param {object} conv Conversation object with PII masked
  */
 function pushToPubSubTopic(conv) {
-  console.log(`Pushing message ${conv.responseId} ${conv.session}`);
+  console.log(`Pushing message [${conv.responseId}, ${conv.session}]`);
 }
 
 /**
@@ -114,6 +114,8 @@ function log(conv) {
   };
   dlp.deidentifyContent(request)
      .then(responses => {
+       console.log('Deidentifying successful: ' +
+                      `[${conv.responseId}, ${conv.session}]`);
        conv.queryResult.queryText = responses[0].item.value;
        pushToPubSubTopic(conv);
      })

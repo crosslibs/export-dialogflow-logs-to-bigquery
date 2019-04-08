@@ -1,0 +1,36 @@
+{
+  "name": "bigquery",
+  "version": "1.0.0",
+  "description": "BigQuery setup scripts",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "lint": "eslint '**/*.js'",
+    "lint-fix": "eslint --fix '**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crosslibs/export-dialogflow-logs-to-bigquery.git"
+  },
+  "keywords": [
+    "BigQuery",
+    "gcp-bigquery",
+    "bq"
+  ],
+  "author": "Chaitanya Prakash N <chaitanyaprakash.n@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/crosslibs/export-dialogflow-logs-to-bigquery/issues"
+  },
+  "homepage": "https://github.com/crosslibs/export-dialogflow-logs-to-bigquery#readme",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "dependencies": {
+    "@google-cloud/bigquery": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-google": "^0.12.0"
+  }
+}
