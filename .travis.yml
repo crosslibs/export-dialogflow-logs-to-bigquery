@@ -22,7 +22,7 @@ before_install:
 - npm install
 - GOOGLE_APPLICATION_CREDENTIALS=gcp-sa-bigquery-creds.json LOCATION_ID=asia-south1 DATASET_NAME=conversations TABLE_NAME=messages npm start
 # Deploy webhook
-- cd df-webhook
+- cd ../df-webhook
 install:
 - npm install
 script:
