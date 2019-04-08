@@ -19,6 +19,8 @@
  */
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const sinon = require('sinon');
+const proxyquire = require('proxyquire');
 chai.use(chaiHttp);
 const expect = chai.expect;
 
@@ -204,23 +206,26 @@ describe('webhook', () => {
             expect(res).to.have.status(400);
           });
     });
-
-    /**
-     * Verify that the fulfillment function is invoked
-     * when the request body validation is successful
-     */
-    it('fulfillment function is invoked when request body is valid', () => {
-      chai.request(server)
-          .post('/fulfillment')
-          .set('content-type', 'application/json')
-          .send(JSON.stringify({queryResult: {queryText: 'query text'},
-            session: 'session', responseId: 'response-id'}))
-          .end((err, res) => {
-            expect(err).to.be.null;
-            expect(res).to.have.status(200);
-          });
-    });
   });
+});
+
+describe('when request data is valid', () => {
+  /**
+   * Verify that the fulfillment function is invoked
+   * when the request body validation is successful
+   */
+  it('fulfillment function is invoked when request body is valid', () => {
+    chai.request(server)
+        .post('/fulfillment')
+        .set('content-type', 'application/json')
+        .send(JSON.stringify({queryResult: {queryText: 'query text'},
+          session: 'session', responseId: 'response-id'}))
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+        });
+  });
+
 });
 
 /**

@@ -3,7 +3,7 @@
 This folder hosts a sample webhook for fulfillment. This is a simple node.js app and can be deployed to Google App Engine.
 
 ## Solution Approach
-This webhook queues the conversation and the session details to Cloud Tasks for asynchronously processing them.
+This webhook queues the conversation after de-identifying (masking) into a PubSub topic.
 
 ## Building and Testing
 
@@ -19,12 +19,13 @@ This webhook queues the conversation and the session details to Cloud Tasks for 
 ## Deploying the service
 
 #### Local environment
-`> npm start` to run the service locally
+`> GOOGLE_APPLICATION_CREDENTIALS=<creds> GOOGLE_CLOUD_PROJECT=<project-id> npm start` to run the service locally
 
 #### Google App Engine (GAE)
 ##### Pre-requisites
-* You need to have `gcloud` sdk installed before running the following command and have necessary permissions (at least `App Engine Admin`, `Storage Object Admin` and `Cloud Build Editor` roles are needed).
+* You need to have `gcloud` sdk installed before running the following command and have necessary permissions (at least `App Engine Admin`, `Storage Object Admin`, `Cloud Build Editor`. `Service Usage Consumer` roles are needed).
 * If you already have GAE services running in the project, ensure that you provide a service name in the `app.yaml` file.
+* Also ensure that `Cloud DLP API` is enabled in the GCP project.
 
 ##### Deploy to Google Cloud Platform
- `> GOOGLE_APPLICATION_CREDENTIALS=<creds> gcloud app deploy --project=<project-id>` to deploy to GAE standard.
+`> GOOGLE_APPLICATION_CREDENTIALS=<creds> GOOGLE_CLOUD_PROJECT=<project-id> gcloud app deploy --project=<project-id>` to deploy to GAE standard.

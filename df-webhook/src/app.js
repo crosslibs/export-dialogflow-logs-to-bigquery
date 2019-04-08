@@ -13,12 +13,51 @@
  * limitations under the License.
  */
 'use strict';
+
+/**
+ * Check that all required parameters are present
+ */
+const Utils = require('./utils');
+const projectId = process.env.GOOGLE_CLOUD_PROJECT;
+
+const DLP = require('@google-cloud/dlp');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const FulfillmentError = require('./error');
-const Utils = require('./utils');
 const port = process.env.PORT || 8080;
+
+/**
+ * DLP Configuration
+ */
+const dlp = new DLP.DlpServiceClient();
+const parent = dlp.projectPath(projectId);
+const infoTypes = [{name: 'PHONE_NUMBER'},
+  {name: 'EMAIL_ADDRESS'},
+  {name: 'PERSON_NAME'},
+  {name: 'CREDIT_CARD_NUMBER'}];
+const customInfoTypes = [{
+  infoType: {
+    name: 'POLICY_NUMBER',
+  },
+  regex: {
+    pattern: '[1-9]{3}-[1-9]{5}',
+  },
+  likelihood: 'POSSIBLE',
+}];
+const deidentifyConfig = {
+  infoTypeTransformations: {
+    transformations: [
+      {
+        primitiveTransformation: {
+          replaceWithInfoTypeConfig: {},
+        },
+      },
+    ],
+  },
+};
+const minLikelihood = 'LIKELIHOOD_UNSPECIFIED';
+const includeQuote = true;
 
 /**
  * Validates whether the request payload
@@ -49,10 +88,38 @@ function fulfill(req, res) {
 }
 
 /**
+ * Push the message to pubsub topic
+ * @param {object} conv Conversation object with PII masked
+ */
+function pushToPubSubTopic(conv) {
+  console.log(`Pushing message ${conv.responseId} ${conv.session}`);
+}
+
+/**
  * Log dialogflow conversation
  * @param {object} conv webhook request body
  */
 function log(conv) {
+  // Perform DLP and write to PubSub topic
+  const request = {
+    parent: parent,
+    deidentifyConfig: deidentifyConfig,
+    inspectConfig: {
+      infoTypes: infoTypes,
+      customInfoTypes: customInfoTypes,
+      minLikelihood: minLikelihood,
+      includeQuote: includeQuote,
+    },
+    item: {value: conv.queryResult.queryText},
+  };
+  dlp.deidentifyContent(request)
+     .then(responses => {
+       conv.queryResult.queryText = responses[0].item.value;
+       pushToPubSubTopic(conv);
+     })
+     .catch(err => {
+       console.error(err);
+     });
 }
 
 /**

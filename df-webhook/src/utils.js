@@ -19,9 +19,9 @@
  */
 module.exports = {
   isStringEmpty: (str) => {
-    return (str === null || str.trim().length === 0);
+    return (str === undefined || str === null || str.trim().length === 0);
   },
   isEmptyObject: (obj) => {
-    return ((obj === null) || Object.keys(obj).length === 0);
+    return (obj === undefined || obj === null || Object.keys(obj).length === 0);
   },
 };

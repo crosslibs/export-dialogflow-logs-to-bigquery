@@ -10,7 +10,7 @@ Dialogflow Fulfillment mechanism is used to intercept all the conversations usin
 
 ## Architecture
 
-![Export Conversations to BQ](https://user-images.githubusercontent.com/20769938/55611487-4b87fd80-57a3-11e9-975d-7c49ba137b03.png)
+![Export Conversations to BQ](https://user-images.githubusercontent.com/20769938/55735427-ee0fdd00-5a3e-11e9-8771-377b29284cbe.png)
 
 ## Contributions Welcome
 

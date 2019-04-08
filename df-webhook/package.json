@@ -7,7 +7,7 @@
     "start": "node src/app.js",
     "lint": "eslint '**/*.js'",
     "lint-fix": "eslint --fix '**/*.js'",
-    "test": "cross-env NODE_ENV=test nyc mocha",
+    "test": "cross-env NODE_ENV=test GOOGLE_APPLICATION_CREDENTIALS=gcp-sa-creds.json GOOGLE_CLOUD_PROJECT=export-df-logs-to-bq nyc mocha",
     "coverage": "cross-env NODE_ENV=test nyc report mocha --reporter=text-lcov --reporter=html | coveralls"
   },
   "repository": {
@@ -22,8 +22,8 @@
     "interceptor",
     "async",
     "logging",
-    "task",
-    "queues",
+    "pubsub",
+    "gcp-pubsub",
     "DLP",
     "API",
     "masking",
@@ -43,6 +43,7 @@
     "node": ">=10.0.0"
   },
   "dependencies": {
+    "@google-cloud/dlp": "^0.11.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4"
   },
@@ -55,6 +56,7 @@
     "eslint-config-google": "^0.12.0",
     "mocha": "^6.0.2",
     "nyc": "^13.3.0",
+    "proxyquire": "^2.1.0",
     "sinon": "^7.3.1"
   }
 }
