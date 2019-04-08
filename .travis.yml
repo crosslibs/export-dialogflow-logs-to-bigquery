@@ -16,11 +16,11 @@ before_install:
 # Setup PubSub topic
 - cd ../cloud-pubsub
 - npm install
-- GOOGLE_APPLICATION_CREDENTIALS=gcp-sa-pubsub-creds.json TOPIC_NAME=conversations npm start
+- GOOGLE_APPLICATION_CREDENTIALS=gcp-sa-pubsub-creds.json GOOGLE_CLOUD_PROJECT=export-df-logs-to-bq TOPIC_NAME=conversations npm start
 # Setup BQ dataset and table
 - cd ../bigquery
 - npm install
-- GOOGLE_APPLICATION_CREDENTIALS=gcp-sa-bigquery-creds.json LOCATION_ID=asia-south1 DATASET_NAME=conversations TABLE_NAME=messages npm start
+- GOOGLE_APPLICATION_CREDENTIALS=gcp-sa-bigquery-creds.json GOOGLE_CLOUD_PROJECT=export-df-logs-to-bq LOCATION_ID=asia-south1 DATASET_NAME=conversations TABLE_NAME=messages npm start
 # Deploy webhook
 - cd ../df-webhook
 install:
