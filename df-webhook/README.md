@@ -22,8 +22,9 @@ This webhook queues the conversation and the session details to Cloud Tasks for 
 `> npm start` to run the service locally
 
 #### Google App Engine (GAE)
-* ```You need to have gcloud sdk installed before running the following command and have necessary permissions (at least App Engine Admin, Storage Object Admin and Cloud Build Editor roles are needed).```
-* ```If you already have GAE services running in the project, ensure that you provide a service name in the app.yaml file (by uncommenting the relevant lines)```
+##### Pre-requisites
+* You need to have `gcloud` sdk installed before running the following command and have necessary permissions (at least `App Engine Admin`, `Storage Object Admin` and `Cloud Build Editor` roles are needed).
+* If you already have GAE services running in the project, ensure that you provide a service name in the `app.yaml` file.
 
-
+##### Deploy to Google Cloud Platform
  `> GOOGLE_APPLICATION_CREDENTIALS=<creds> gcloud app deploy --project=<project-id>` to deploy to GAE standard.

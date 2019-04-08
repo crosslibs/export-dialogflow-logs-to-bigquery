@@ -1,0 +1,39 @@
+{
+  "name": "cloud-tasks",
+  "version": "1.0.0",
+  "description": "Setup Cloud tasks queue for App Engine services to leverage",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "lint": "eslint '**/*.js'",
+    "lint-fix": "eslint --fix '**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crosslibs/export-dialogflow-logs-to-bigquery.git"
+  },
+  "keywords": [
+    "Google",
+    "Cloud",
+    "Tasks",
+    "gcp",
+    "gcp-tasks",
+    "queues"
+  ],
+  "author": "Chaitanya Prakash N <chaitanyaprakash.n@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/crosslibs/export-dialogflow-logs-to-bigquery/issues"
+  },
+  "homepage": "https://github.com/crosslibs/export-dialogflow-logs-to-bigquery#readme",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-google": "^0.12.0"
+  },
+  "dependencies": {
+    "@google-cloud/tasks": "^0.5.0"
+  }
+}

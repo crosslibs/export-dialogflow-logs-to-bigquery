@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+
+# Exclude creds
+gcp-sa-tasks-creds.json
+.coveralls.yml
