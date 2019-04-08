@@ -11,8 +11,8 @@ handlers:
   secure: always
   redirect_http_response_code: 301
 
-env_vars:
-  - TOPIC_NAME: conversations
+env_variables:
+  TOPIC_NAME: conversations
 
 instance_class: F1
 automatic_scaling:
