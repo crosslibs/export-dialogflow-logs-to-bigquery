@@ -92,7 +92,7 @@ const schema = [
   },
   {
     description: 'intent detection confidence score',
-    mode: 'REQUIRED',
+    mode: 'NULLABLE',
     name: 'intentDetectionConfidence',
     type: 'FLOAT'
   },
