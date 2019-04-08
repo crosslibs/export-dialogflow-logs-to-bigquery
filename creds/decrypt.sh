@@ -13,7 +13,7 @@
 # limitations under the License.
 
 openssl aes-256-cbc -K $encrypted_349152daa2ae_key -iv $encrypted_349152daa2ae_iv -in creds.tar.enc -out creds.tar -d
-
+tar xvf creds.tar
 # Move keys to correct folders
 mv gcp-sa-creds.json ../df-webhook/
 mv gcp-sa-pubsub-creds.json ../cloud-pubsub/
