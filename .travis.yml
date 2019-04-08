@@ -20,7 +20,7 @@ before_install:
 # Setup BQ dataset and table
 - cd ../bigquery
 - npm install
-- GOOGLE_APPLICATION_CREDENTIALS=gcp-sa-bigquery-creds.json GOOGLE_CLOUD_PROJECT=export-df-logs-to-bq LOCATION_ID=asia-south1 DATASET_NAME=conversations TABLE_NAME=messages npm start
+- GOOGLE_APPLICATION_CREDENTIALS=gcp-sa-bigquery-creds.json GOOGLE_CLOUD_PROJECT=export-df-logs-to-bq LOCATION_ID=asia-south1 DATASET_ID=conversations TABLE_ID=messages npm start
 # Deploy webhook
 - cd ../df-webhook
 install:

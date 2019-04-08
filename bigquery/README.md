@@ -13,7 +13,7 @@ The script uses `@google-cloud/bigquery` Node.js client libraries to do the nece
 ## Deploying the service
 
 ##### Pre-requisites
-* Please ensure that the service account has necessary permissions (at least `BigQuery User` role is needed) before running the command.
+* Please ensure that the service account has necessary permissions (at least `BigQuery Data Owner` role is  needed) before running the command.
 * Also ensure that `BigQuery` service is enabled in the GCP project
 
-`> GOOGLE_APPLICATION_CREDENTIALS=<creds> GOOGLE_CLOUD_PROJECT=<project-id> LOCATION_ID=<locationId> DATASET_NAME=<dataset-name> TABLE_NAME=<table-name> npm start`
+`> GOOGLE_APPLICATION_CREDENTIALS=<creds> GOOGLE_CLOUD_PROJECT=<project-id> LOCATION_ID=<locationId> DATASET_ID=<dataset-name> TABLE_ID=<table-name> npm start`

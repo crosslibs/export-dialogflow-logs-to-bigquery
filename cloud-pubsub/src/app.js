@@ -39,3 +39,22 @@ if (isEmpty(keyfile)
                   'TOPIC_NAME');
   process.exit(1);
 }
+
+const {PubSub} = require('@google-cloud/pubsub');
+const pubsub = new PubSub({projectId});
+
+pubsub.createTopic(topicName)
+    .then((responses) => {
+      console.log(`Successfully created topic: ${topicName}`);
+      console.log(responses[0]);
+    })
+    .catch((err) => {
+      if (err.code == 6) {
+        // ALREADY_EXISTS
+        console.log(`Topic ${topicName} already exists!`);
+      } else {
+        console.error(`Error while creating topic: ${topicName}`);
+        console.error(err);
+        process.exit(2);
+      }
+    });

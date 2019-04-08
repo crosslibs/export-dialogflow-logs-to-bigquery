@@ -16,8 +16,8 @@
 const keyfile = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 const projectId = process.env.GOOGLE_CLOUD_PROJECT;
 const locationId = process.env.LOCATION_ID;
-const datasetName = process.env.DATASET_NAME;
-const tableName = process.env.TABLE_NAME;
+const datasetId = process.env.DATASET_ID;
+const tableId = process.env.TABLE_ID;
 
 /**
  * Checks whether the string is empty or not
@@ -36,10 +36,95 @@ function isEmpty(str) {
 if (isEmpty(keyfile)
      || isEmpty(projectId)
      || isEmpty(locationId)
-     || isEmpty(datasetName)
-     || isEmpty(tableName)) {
+     || isEmpty(datasetId)
+     || isEmpty(tableId)) {
   console.error('Missing one or more of required environment variables: ' +
                   'GOOGLE_APPLICATION_CREDENTIALS, GOOGLE_CLOUD_PROJECT, ' +
-                  'LOCATION_ID, DATASET_NAME, TABLE_NAME');
+                  'LOCATION_ID, DATASET_ID, TABLE_ID');
   process.exit(1);
 }
+
+const {BigQuery} = require('@google-cloud/bigquery');
+const client = new BigQuery();
+const options = {
+  location: locationId,
+};
+
+client.createDataset(datasetId, options)
+    .then((responses) => {
+      console.log(`Successfully created BQ dataset ${datasetId}`);
+      console.log(responses[0]);
+    })
+    .catch((err) => {
+      if (err.code == 409) {
+        console.log(`BQ dataset ${datasetId} already exists!`);
+      } else {
+        console.error(`Error while creating dataset ${datasetId}`);
+        console.error(err);
+        process.exit(2);
+      }
+    });
+
+const schema = [
+  {
+    description: 'response id',
+    mode: 'REQUIRED',
+    name: 'responseId',
+    type: 'STRING',
+  },
+  {
+    description: 'session path',
+    mode: 'REQUIRED',
+    name: 'session',
+    type: 'STRING',
+  },
+  {
+    description: 'user id',
+    mode: 'NULLABLE',
+    name: 'userId',
+    type: 'string',
+  },
+  {
+    description: 'intent',
+    mode: 'NULLABLE',
+    name: 'intent',
+    type: 'RECORD',
+    fields: [
+      {
+        'description': 'intent name',
+        'name': 'name',
+        'type': 'STRING',
+        'mode': 'NULLABLE',
+      },
+      {
+        'description': 'intent display name',
+        'name': 'displayName',
+        'type': 'STRING',
+        'mode': 'NULLABLE',
+      },
+    ],
+  },
+];
+
+const tableOptions = {
+  location: locationId,
+  schema: schema,
+};
+
+client.dataset(datasetId)
+    .createTable(tableId, tableOptions)
+    .then((responses) => {
+      console.log(`Successfully created table ${tableId}`);
+      console.log(responses[0]);
+    })
+    .catch((err) => {
+      if(err.code == 409) {
+        //ALREADY_EXISTS
+        console.log(`BQ table ${tableId} already exists!`);
+      }
+      else {
+        console.error(`Error while creating table ${tableId}`);
+        console.error(err);
+        process.exit(2);
+      }
+    });
